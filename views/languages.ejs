@@ -1,0 +1,77 @@
+<h2><%= title %></h2>
+<hr/>
+
+<div class="row">
+    <% if(currentAdmin && currentAdmin.is_super_admin){ %>
+    <div class="col-md-12">
+        <a href="/languages/create" class="btn btn-default btn-md pull-right"
+           type="button">Create</a>
+    </div>
+    <% } %>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>ISO Code</th>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Created Time</th>
+                    <th>Updated Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% languages.forEach(function(language){ %>
+                <tr>
+                    <td><%= language.id %></td>
+                    <td><%= language.iso_code %></td>
+                    <td><%= language.title %></td>
+                    <td>
+                        <% if(language.status){ %>
+                        Enabled
+                        <% }else{ %>
+                        Disabled
+                        <% } %>
+                    </td>
+                    <td><%= language.created_at.toLocaleDateString() %></td>
+                    <td><%= language.updated_at.toLocaleDateString() %></td>
+
+                    <td>
+                        <div class="btn-toolbar" role="toolbar">
+                            <div class="btn-group">
+                                <% if(language.status == 1){ %>
+                                <a href="/languages/enable/<%= language.id %>"
+                                   class="btn btn-sm btn-default disabled" role="button">
+                                    Enable
+                                </a>
+                                <a href="/languages/disable/<%= language.id %>"
+                                   class="btn btn-sm btn-danger"
+                                   role="button">
+                                    Disable
+                                </a>
+                                <% }else{ %>
+                                <a href="/languages/enable/<%= language.id %>"
+                                   class="btn btn-sm btn-success" role="button">
+                                    Enable
+                                </a>
+                                <a href="/languages/disable/<%= language.id %>"
+                                   class="btn btn-sm btn-default disabled"
+                                   role="button">
+                                    Disable
+                                </a>
+                                <% } %>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

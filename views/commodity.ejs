@@ -1,0 +1,160 @@
+<h2><%= title %></h2>
+<hr/>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <form class="form-horizontal" role="form" method="get" action="/commodities">
+
+            <div class="form-group">
+                <label for="attrKeywordsString" class="col-md-4 control-label">Attr Keywords</label>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="attrKeywordsString"
+                           value="<%= commodity.attr_keywords_string %>" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="ownerId" class="col-md-4 control-label">Owner Id</label>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="ownerId"
+                           value="<%= commodity.owner_id %>" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="image" class="col-md-4 control-label">Image</label>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="image"
+                           value="<%= commodity.image %>" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="title" class="col-md-4 control-label">Title</label>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="title" value="<%= commodity.title %>" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="col-md-4 control-label">Description</label>
+
+                <div class="col-md-4">
+                    <input type="text" rows="3" class="form-control" id="description"
+                           value="<%= commodity.description %>" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="longitude" class="col-md-4 control-label">Longitude</label>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="longitude" value="<%= commodity.longitude %>" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="latitude" class="col-md-4 control-label">Latitude</label>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="latitude" value="<%= commodity.latitude %>" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="updateTime" class="col-md-4 control-label">Update Time</label>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="updateTime" value="<%= commodity.update_time %>"
+                           disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="addedTime" class="col-md-4 control-label">Added Time</label>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="addedTime" value="<%= commodity.added_time %>" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="status" class="col-md-4 control-label">Status</label>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="status"
+                           value="<%= commodityStatus[commodity.status] %>" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="priceMode" class="col-md-4 control-label">Price Mode</label>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="priceMode"
+                           value="<%= commodityPriceMode[commodity.price_mode] %>" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="fixedPrice" class="col-md-4 control-label">Fixed Price</label>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="fixedPrice"
+                           value="<%= commodity.fixed_price %>" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="currentBiddingPrice" class="col-md-4 control-label">Current Bidding Price</label>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="currentBiddingPrice"
+                           value="<%= commodity.current_bidding_price %>" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="biddingStartTime" class="col-md-4 control-label">Bidding Start Time</label>
+
+                <div class="col-md-4">
+                    <input type="datetime" class="form-control" id="biddingStartTime"
+                           value="<%= commodity.bidding_start_time %>"
+                           disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="biddingEndTime" class="col-md-4 control-label">Bidding End Time</label>
+
+                <div class="col-md-4">
+                    <input type="datetime" class="form-control" id="biddingEndTime"
+                           value="<%= commodity.bidding_end_time %>"
+                           disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="numInStock" class="col-md-4 control-label">Stock</label>
+
+                <div class="col-md-4">
+                    <input type="datetime" class="form-control" id="numInStock" value="<%= commodity.num_in_stock %>"
+                           disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-5 col-md-2">
+                    <button type="submit" class="btn btn-primary btn-block">Close</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

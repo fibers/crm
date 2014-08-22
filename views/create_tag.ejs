@@ -1,0 +1,47 @@
+<h2><%= title %></h2>
+<hr/>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <form class="form-horizontal" role="form" method="post">
+
+            <div class="form-group">
+                <label for="title" class="col-md-5 control-label">Title</label>
+
+                <div class="col-md-3">
+                    <input type="text" class="form-control" id="title" name="title" autofocus required
+                           autocomplete="off">
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <label class="col-md-5 control-label">Status</label>
+
+                <div class="col-md-4">
+                    <label class="radio-inline">
+                        <input type="radio"
+                               name="status" id="status1" value="1" checked>&nbsp;&nbsp;Enabled
+                    </label>
+                    <label class="radio-inline" style="margin-left:40px">
+                        <input type="radio"
+                               name="status" id="status0" value="0">&nbsp;&nbsp;Disabled
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-push-5 col-md-1" style="margin-left:3%">
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </div>
+
+                <div class="col-md-push-6 col-md-1" style="margin-left:-6%">
+                    <a href="/tags" type="button" class="btn btn-primary btn-block">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

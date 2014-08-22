@@ -1,0 +1,68 @@
+<h2><%= title %></h2>
+<hr/>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <form role="form" method="get" action="/logs/<%= range %>">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" value="<%= searchWord %>">
+
+                <div class="input-group-btn">
+                    <a href="/logs/<%= range %>/0" class="btn btn-default btn-md">&times;</a>
+                    <button class="btn btn-default btn-md" type="submit">Search by Operator</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <div class="btn-group">
+            <button class="btn btn-default btn-md dropdown-toggle" type="button" data-toggle="dropdown">
+                Recent <%= rangeText %>&nbsp;<span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="/logs/month/0">Recent Month</a></li>
+                <li><a href="/logs/week/0">Recent Week</a></li>
+                <li><a href="/logs/day/0">Recent Day</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<% if( logs.length > 0 ){ %>
+<%- include pagination.ejs %>
+<% } %>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Operator</th>
+                    <th>url</th>
+                    <th>Created Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% logs.forEach(function(log){ %>
+                <tr>
+                    <td><%= log.id %></td>
+                    <td><%= log.operator %></td>
+                    <td><%= log.url %></td>
+                    <td><%= log.created_at %></td>
+                </tr>
+                <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<% if( logs.length > 0 ){ %>
+<%- include pagination.ejs %>
+<% } %>

@@ -1,0 +1,144 @@
+<h2><%= title %></h2>
+<hr/>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <form class="form-horizontal" role="form" method="get" action="/users">
+
+            <div class="form-group">
+                <label for="username" class="col-md-4 control-label">User Name</label>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="username" value="<%= user.username %>" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="First Name" class="col-md-4 control-label">First Name</label>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="firstName" value="<%= user.first_name %>" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Last Name" class="col-md-4 control-label">Last Name</label>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="lastName" value="<%= user.last_name %>" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Email" class="col-md-4 control-label">Email</label>
+
+                <div class="col-md-4">
+                    <input type="email" class="form-control" id="email" value="<%= user.email %>" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <label class="col-md-4 control-label">Staff</label>
+
+                <div class="col-md-4">
+                    <label class="radio-inline">
+                        <% if( user.is_staff ){ %>
+                        <input type="radio" name="staffRadio" id="staffRadioY" checked disabled>
+                        <% }else{ %>
+                        <input type="radio" name="staffRadio" id="staffRadioY" disabled>
+                        <% } %>
+                        &nbsp;Y
+                    </label>
+
+                    <label class="radio-inline">
+                        <% if( user.is_staff ){ %>
+                        <input type="radio" name="staffRadio" id="staffRadioN" disabled>
+                        <% }else{ %>
+                        <input type="radio" name="staffRadio" id="staffRadioN" checked disabled>
+                        <% } %>
+                        &nbsp;N
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <label class="col-md-4 control-label">Active</label>
+
+                <div class="col-md-4">
+                    <label class="radio-inline">
+                        <% if( user.is_active ){ %>
+                        <input type="radio" name="activeRadio" id="activeRadioY" checked disabled>
+                        <% }else{ %>
+                        <input type="radio" name="activeRadio" id="activeRadioY" disabled>
+                        <% } %>
+                        &nbsp;Y
+                    </label>
+
+                    <label class="radio-inline">
+                        <% if( user.is_active ){ %>
+                        <input type="radio" name="activeRadio" id="activeRadioN" disabled>
+                        <% }else{ %>
+                        <input type="radio" name="activeRadio" id="activeRadioN" checked disabled>
+                        <% } %>
+                        &nbsp;N
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <label class="col-md-4 control-label">Super User</label>
+
+                <div class="col-md-4">
+                    <label class="radio-inline">
+                        <% if( user.is_superuser ){ %>
+                        <input type="radio" name="superUserRadio" id="superUserRadioY" checked disabled>
+                        <% }else{ %>
+                        <input type="radio" name="superUserRadio" id="superUserRadioY" disabled>
+                        <% } %>
+                        &nbsp;Y
+                    </label>
+
+                    <label class="radio-inline">
+                        <% if( user.is_superuser ){ %>
+                        <input type="radio" name="superUserRadio" id="superUserRadioN" disabled>
+                        <% }else{ %>
+                        <input type="radio" name="superUserRadio" id="superUserRadioN" checked disabled>
+                        <% } %>
+                        &nbsp;N
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="lastLogin" class="col-md-4 control-label">Last Login</label>
+
+                <div class="col-md-4">
+                    <input type="datetime" class="form-control" id="lastLogin" value="<%= user.last_login %>" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="dateJoined" class="col-md-4 control-label">Date Joined</label>
+
+                <div class="col-md-4">
+                    <input type="datetime" class="form-control" id="dateJoined" value="<%= user.date_joined %>"
+                           disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-push-5 col-md-2">
+                    <button type="submit" class="btn btn-primary btn-block">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

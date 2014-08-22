@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM</title>
+    <link href="/stylesheets/bootstrap-theme.css" rel="stylesheet">
+    <link href="/stylesheets/bootstrap.css" rel="stylesheet">
+    <link href="/stylesheets/main.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 100px;
+            padding-bottom: 40px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/index">CRM</a>
+        </div>
+        <div class="navbar-collapse collapse">
+
+            <ul class="nav navbar-nav">
+
+                <li class="dropdown">
+                    <a id="userData" href="#" role="button" class="dropdown-toggle"
+                       data-toggle="dropdown">
+                        User Data
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="userData">
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="=1" href="/users/0">
+                                Users
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="=1" href="/commodities/week/0">
+                                Commodities
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="=1" href="/images/week/0">
+                                Images
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a id="appData" href="#" role="button" class="dropdown-toggle"
+                       data-toggle="dropdown">
+                        App Data
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="appData">
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="=1" href="/categories/editview">
+                                Categories
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="=1" href="/languages">
+                                Languages
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="=1" href="/tags">
+                                Tags
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a id="appData" href="#" role="button" class="dropdown-toggle"
+                       data-toggle="dropdown">
+                        Reports
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="appData">
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="=1" href="/reports/commodity">
+                                Commodity Report
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="=1" href="/reports/user">
+                                User Report
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a id="privilege" href="#" role="button" class="dropdown-toggle"
+                       data-toggle="dropdown">
+                        Privileges
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="privilege">
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="/admins/0">
+                                Administrators
+                            </a>
+                        </li>
+
+                        <% if( currentAdmin && currentAdmin.is_super_admin ){ %>
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="/logs/month/0">
+                                Logs
+                            </a>
+                        </li>
+                        <% } %>
+                    </ul>
+                </li>
+            </ul>
+
+
+            <ul class="nav navbar-nav navbar-right">
+                <% if (!currentAdmin) { %>
+                <li><a href="/login">Login</a></li>
+                <% } else { %>
+                <li class="dropdown">
+                    <a id="admininfo" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                        Welcome, <%= currentAdmin.username %>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="admininfo">
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="/admin/password/<%= currentAdmin.id %>">
+                                Change password
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="/logout">Logout</a></li>
+                <% } %>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a id="language" href="#" role="button" class="dropdown-toggle"
+                       data-toggle="dropdown">
+                        <% if( language ){ %>
+                        <%= language.title %>
+                        <% } %>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="language">
+                        <% if(availableLanguages){ %>
+                        <% availableLanguages.forEach(function(language){ %>
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="/languages/set/<%= language.id %>">
+                                <%= language.title %>
+                            </a>
+                        </li>
+                        <% }) %>
+                        <% } %>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="container" class="container">
+    <% if (success) { %>
+    <div class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= success %>
+    </div>
+    <% } %>
+    <% if (error) { %>
+    <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= error %>
+    </div>
+    <% } %>
+    <%- body %>
+</div>
+<footer>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <p>Powered by <a href="mailto:shengyuhong@wespoke.com">fibers</a> 2014</p>
+        </div>
+        <div class="col-md-6">
+            <address class="text-right">
+                <strong>Third Stone, Inc.</strong><br>
+                Room 0506, Building B, Tower 1<br>
+                Wangjing SOHO, Chaoyang Distinct, Beijing<br>
+                <abbr title="Phone">P:</abbr> (123) 456-7890
+            </address>
+        </div>
+    </div>
+</footer>
+
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/bootstrap.js"></script>
+<script src="/javascripts/bootstrap-tags.js"></script>
+<script src="/javascripts/main.js"></script>
+
+</body>
+</html>

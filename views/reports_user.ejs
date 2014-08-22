@@ -1,0 +1,68 @@
+<h2><%= title %></h2>
+<hr/>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>User Id</th>
+                    <th>Reporter Id</th>
+                    <th>Processed</th>
+                    <th>Reason</th>
+                    <th>Created Time</th>
+                    <th>Updated Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% userReports.forEach(function(userReport){ %>
+                <tr>
+                    <td><%= userReport.id %></td>
+                    <td>
+                         <a href="/users/detail/<%= userReport.user_id %>"><%= userReport.user_id %></a>
+                    </td>
+                    <td>
+                        <a href="/users/detail/<%= userReport.reporter_id %>"><%= userReport.reporter_id %></a>
+                    </td>
+                    <td>
+                        <% if(userReport.is_processed){ %>
+                        Y
+                        <% }else{ %>
+                        N
+                        <% } %>
+                    </td>
+                    <td><%= userReport.reason %></td>
+                    <td><%= userReport.created_at.toLocaleDateString() %></td>
+                    <td><%= userReport.updated_at.toLocaleDateString() %></td>
+
+                    <td>
+                        <div class="btn-toolbar" role="toolbar">
+                           <div class="btn-group">
+                                <a href="/reports/user/detail/<%= userReport.id %>"
+                                   class="btn btn-sm btn-info disabled" role="button">Detail</a>
+                            </div>
+
+                            <div class="btn-group">
+                                <% if(userReport.is_processed){ %>
+                                <a href="/reports/user/process/<%= userReport.id %>"
+                                   class="btn btn-sm btn-default disabled" role="button">
+                                    Process
+                                </a>
+                                <% }else{ %>
+                                <a href="/reports/user/process/<%= userReport.id %>"
+                                   class="btn btn-sm btn-default btn-success" role="button">
+                                    Process
+                                </a>
+                                <% } %>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

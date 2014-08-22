@@ -1,0 +1,26 @@
+<div class="row" style="margin-top:20px;">
+    <div class="col-md-12">
+        <ul class="pagination pull-right">
+
+            <% if( pagination.currentPage == 0 ){ %>
+            <li class="disabled"><a href="javascript:void(0)">&laquo;</a></li>
+            <% } else{ %>
+            <li><a href="<%= pagination.previousPage %>">&laquo;</a></li>
+            <% } %>
+
+            <% for(var i = 0; i < pagination.totalPages; i++){ %>
+            <% if( i == pagination.currentPage ){ %>
+            <li class="active"><a href="javascript:void(0)"><%= i + 1 %></a></li>
+            <% } else{ %>
+            <li><a href="<%= i %>"><%= i + 1 %></a></li>
+            <% } %>
+            <% } %>
+
+            <% if( pagination.currentPage == (pagination.totalPages - 1) ){ %>
+            <li class="disabled"><a href="javascript:void(0)">&raquo;</a></li>
+            <% } else{ %>
+            <li><a href="<%= pagination.nextPage %>">&raquo;</a></li>
+            <% } %>
+        </ul>
+    </div>
+</div>

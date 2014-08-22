@@ -1,0 +1,70 @@
+<h2><%= title %></h2>
+<hr/>
+
+<div class="row">
+
+    <div class="col-md-9">
+
+        <div class="btn-group btn-group-md pull-right">
+            <a href="/categories/output" class="btn btn-default btn-md" role="button"
+               data-toggle="tooltip" data-placement="left" title="Output the category tree">
+                <span class="glyphicon glyphicon-download"></span>&nbsp;Download
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="btn-group btn-group-justified">
+
+            <% if(currentUrl.substring(0, '/categories/editview'.length) == '/categories/editview'){ %>
+            <a role="button" class="btn btn-default active" href="javascript:void(0)"
+               data-toggle="tooltip" data-placement="top" title="Show the edit view">
+                <span class="glyphicon glyphicon-edit"></span>
+                &nbsp;Edit View
+            </a>
+            <a role="button" class="btn btn-default" href="/categories/treeview"
+               data-toggle="tooltip" data-placement="top" title="Show the tree view">
+                <span class="glyphicon glyphicon-tree-conifer"></span>
+                &nbsp;Tree View
+            </a>
+            <% }else{ %>
+            <a role="button" class="btn btn-default" href="/categories/editview"
+               data-toggle="tooltip" data-placement="top" title="Show the edit view">
+                <span class="glyphicon glyphicon-edit"></span>
+                &nbsp;Edit View
+            </a>
+            <a role="button" class="btn btn-default active" href="javascript:void(0)"
+               data-toggle="tooltip" data-placement="top" title="Show the tree view">
+                <span class="glyphicon glyphicon-tree-conifer"></span>
+                &nbsp;Tree View
+            </a>
+            <% } %>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="tree well col-md-8 col-md-offset-2" style="margin-top:20px;">
+    <ul>
+        <% roots.forEach(function(root){ %>
+        <li>
+            <span><i class="glyphicon glyphicon-minus-sign"></i>&nbsp;<%= root.title %></span>
+            <ul>
+                <% root.children.forEach(function(subCategory){ %>
+                <li>
+                    <span><i class="glyphicon glyphicon-minus-sign"></i>&nbsp;<%= subCategory.title %></span>
+                    <ul>
+                        <% subCategory.children.forEach(function(child){ %>
+                        <li>
+                            <span><i class="glyphicon glyphicon-leaf"></i>&nbsp;<%= child.title %></span>
+                        </li>
+                        <% }) %>
+                    </ul>
+                </li>
+                <% }) %>
+            </ul>
+        </li>
+        <% }) %>
+    </ul>
+</div>

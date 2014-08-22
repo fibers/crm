@@ -1,0 +1,102 @@
+<h2><%= title %></h2>
+<hr/>
+
+<div class="row">
+    <div class="col-md-6">
+        <form role="form" method="get" action="/users">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" value="<%= searchWord %>">
+                <div class="input-group-btn">
+                    <a href="/users/0" class="btn btn-default btn-md">&times;</a>
+                    <button class="btn btn-default btn-md" type="submit">Search by User Name</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<% if( users.length > 0 ){ %>
+<%- include pagination.ejs %>
+<% } %>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>User Name</th>
+                    <th>Email</th>
+                    <th>Staff(Y/N)</th>
+                    <th>Active(Y/N)</th>
+                    <th>Super User(Y/N)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% users.forEach(function(user){ %>
+                <tr>
+                    <td><%= user.id %></td>
+                    <td><%= user.username %></td>
+                    <td><%= user.email %></td>
+                    <td>
+                        <% if(user.is_staff){ %>
+                        Y
+                        <% }else{ %>
+                        N
+                        <% } %>
+                    </td>
+                    <td>
+                        <% if(user.is_active){ %>
+                        Y
+                        <% }else{ %>
+                        N
+                        <% } %>
+                    </td>
+                    <td>
+                        <% if(user.is_superuser){ %>
+                        Y
+                        <% }else{ %>
+                        N
+                        <% } %>
+                    </td>
+
+                    <td>
+                        <div class="btn-toolbar" role="toolbar">
+                            <div class="btn-group">
+                                <a href="/users/detail/<%= user.id %>" class="btn btn-sm btn-info"
+                                   role="button">Detail</a>
+                            </div>
+
+                            <div class="btn-group">
+                                <% if(user.is_active){ %>
+                                <a href="/users/activate/<%= user.id %>" class="btn btn-sm btn-default disabled"
+                                   role="button">
+                                    Activate
+                                </a>
+                                <a href="/users/deactivate/<%= user.id %>" class="btn btn-sm btn-danger" role="button">
+                                    Deactivate
+                                </a>
+                                <% }else{ %>
+                                <a href="/users/activate/<%= user.id %>" class="btn btn-sm btn-success" role="button">
+                                    Activate
+                                </a>
+                                <a href="/users/deactivate/<%= user.id %>" class="btn btn-sm btn-default disabled"
+                                   role="button">
+                                    Deactivate
+                                </a>
+                                <% } %>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<% if( users.length > 0 ){ %>
+<%- include pagination.ejs %>
+<% } %>

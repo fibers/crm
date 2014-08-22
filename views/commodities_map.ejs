@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Commodities Map View</title>
+    <style>
+        html, body, #map-canvas {
+            height: 100%;
+            margin: 0px;
+            padding: 0px
+        }
+    </style>
+
+</head>
+<body>
+<div id="map-canvas"></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false"></script>
+<script>
+    function initialize() {
+
+        var commodities = <%- commodities %>;
+
+        var centerLatlng = new google.maps.LatLng(35.623877, 153.984375);
+        var mapOptions = {
+            zoom: 2,
+            center: centerLatlng
+        };
+
+        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+        for (var i in commodities) {
+            var commodity = commodities[i];
+            var latlng = new google.maps.LatLng(commodity.latitude, commodity.longitude);
+            new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title: commodity.title
+            });
+        }
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+</body>
+</html>

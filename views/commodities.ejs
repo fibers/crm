@@ -1,0 +1,132 @@
+<h2><%= title %></h2>
+<hr/>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <form role="form" method="get" action="/commodities/<%= range %>">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" value="<%= searchWord %>">
+                <div class="input-group-btn">
+                    <a href="/commodities/<%= range %>/0" class="btn btn-default btn-md">&times;</a>
+                    <button class="btn btn-default btn-md" type="submit">Search by Title</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <div class="btn-toolbar" role="toolbar">
+            <div class="btn-group">
+                <button class="btn btn-default btn-md dropdown-toggle" type="button" data-toggle="dropdown">
+                    Recent <%= rangeText %> <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="/commodities/week/0">Recent Week</a></li>
+                    <li><a href="/commodities/day/0">Recent Day</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <a href="/commodities/map/<%= range %>" target='_blank' class="btn btn-default btn-md" role="button"
+                   data-toggle="tooltip" data-placement="left" title="Press this to show a map view">
+                    <span class="glyphicon glyphicon-globe"></span>&nbsp;Map
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<% if( commodities.length > 0 ){ %>
+<%- include pagination.ejs %>
+<% } %>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Image</th>
+                    <th>Status</th>
+                    <th>Update Time</th>
+                    <th>Censored</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% commodities.forEach(function(commodity){ %>
+                <tr>
+                    <td><%= commodity.id %></td>
+                    <td class="col-md-4"><%= commodity.title %></td>
+                    <td>
+                        <img id="commodityImage<%= commodity.id %>" src="<%= commodity.image %>"
+                             class="img-responsive" style="width:40px;height:40px"
+                             alt="Image for <%= commodity.title %>">
+                    </td>
+                    <td><%= commodityStatus[commodity.status] %></td>
+                    <td><%= commodity.update_time.toLocaleDateString() %></td>
+
+                    <% if( commodity.internal_status) { %>
+                    <td>Y</td>
+                    <% }else{ %>
+                    <td>N</td>
+                    <% } %>
+
+                    <td>
+                        <div class="btn-toolbar" role="toolbar">
+                            <div class="btn-group">
+                                <a href="/commodities/detail/<%= commodity.id %>" class="btn btn-sm btn-info"
+                                   role="button">Detail</a>
+                            </div>
+
+                            <div class="btn-group">
+                                <% if(commodity.status == 6){ %>
+                                <a href="/commodities/forbid/<%= commodity.id %>"
+                                   class="btn btn-sm btn-default disabled"
+                                   role="button">
+                                    Forbid
+                                </a>
+                                <% }else{ %>
+                                <a href="/commodities/forbid/<%= commodity.id %>" class="btn btn-sm btn-danger"
+                                   role="button">
+                                    Forbid
+                                </a>
+                                <% } %>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="imageModalLabel">Image List</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <ul class="col-md-12 list-unstyled" id="imageList">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<% if( commodities.length > 0 ){ %>
+<%- include pagination.ejs %>
+<% } %>

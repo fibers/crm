@@ -1,0 +1,109 @@
+<h2><%= title %></h2>
+<hr/>
+
+<div class="row">
+    <div class="col-md-6">
+        <form role="form" method="get" action="/admins">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" value="<%= searchWord %>">
+                <div class="input-group-btn">
+                    <a href="/admins/0" class="btn btn-default btn-md">&times;</a>
+                    <button class="btn btn-default btn-md" type="submit">Search by User Name</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <% if(currentAdmin && currentAdmin.is_super_admin){ %>
+    <div class="col-md-6">
+        <a href="/admins/create" class="btn btn-default btn-md" type="button">Create</a>
+    </div>
+    <% } %>
+</div>
+
+<% if( admins.length > 0 ){ %>
+<%- include pagination.ejs %>
+<% } %>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>User Name</th>
+                    <th>Super Admin(Y/N)</th>
+                    <th>Created Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% admins.forEach(function(admin){ %>
+                <tr>
+                    <td><%= admin.id %></td>
+                    <td><%= admin.username %></td>
+                    <td>
+                        <% if(admin.is_super_admin){ %>
+                        Y
+                        <% }else{ %>
+                        N
+                        <% } %>
+                    </td>
+                    <td><%= admin.created_at.toLocaleDateString() %></td>
+
+                    <% if(currentAdmin && currentAdmin.is_super_admin){ %>
+                    <td>
+                        <div class="btn-toolbar" role="toolbar">
+
+                            <% if( currentAdmin.id == admin.id){ %>
+                            <div class="btn-group">
+                                <a href="/admins/delete/<%= admin.id %>" class="btn btn-sm btn-default disabled"
+                                   role="button">Delete</a>
+                            </div>
+
+                            <div class="btn-group">
+                                <a href="/admins/promote/<%= admin.id %>" class="btn btn-sm btn-default disabled"
+                                   role="button">Promote</a>
+                                <a href="/admins/demote/<%= admin.id %>" class="btn btn-sm btn-default disabled"
+                                   role="button">Demote</a>
+                            </div>
+                            <% }else{ %>
+                            <div class="btn-group">
+                                <a href="/admins/delete/<%= admin.id %>" class="btn btn-sm btn-danger"
+                                   role="button">Delete</a>
+                            </div>
+
+                            <div class="btn-group">
+                                <% if(admin.is_super_admin){ %>
+                                <a href="/admins/promote/<%= admin.id %>" class="btn btn-sm btn-default disabled"
+                                   role="button">
+                                    Promote
+                                </a>
+                                <a href="/admins/demote/<%= admin.id %>" class="btn btn-sm btn-danger" role="button">
+                                    Demote
+                                </a>
+                                <% }else{ %>
+                                <a href="/admins/promote/<%= admin.id %>" class="btn btn-sm btn-success" role="button">
+                                    Promote
+                                </a>
+                                <a href="/admins/demote/<%= admin.id %>" class="btn btn-sm btn-default disabled"
+                                   role="button">
+                                    Demote
+                                </a>
+                                <% } %>
+                            </div>
+                            <% } %>
+                        </div>
+                    </td>
+                    <% } %>
+                </tr>
+                <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<% if( admins.length > 0 ){ %>
+<%- include pagination.ejs %>
+<% } %>

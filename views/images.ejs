@@ -1,0 +1,56 @@
+<h2><%= title %></h2>
+<hr/>
+
+<div class="row">
+
+    <div class="col-md-10">
+        <div class="btn-group pull-right">
+            <button id="forbidImage" class="btn btn-danger btn-md" role="button"
+                    data-toggle="tooltip" data-placement="left"
+                    title="Press this to forbid the commodities with the illegal images">
+                Approve for this page
+            </button>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="btn-group pull-right">
+            <button class="btn btn-default btn-md dropdown-toggle" type="button" data-toggle="dropdown">
+                Recent <%= rangeText %> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="/images/week/0">Recent Week</a></li>
+                <li><a href="/images/day/0">Recent Day</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+<% if( images.length > 0 ){ %>
+<%- include pagination.ejs %>
+<% } %>
+
+<div class="row">
+    <ul class="col-md-12 list-unstyled" id="imageGrid">
+        <% images.forEach(function(image){ %>
+        <li class="list-unstyled col-md-2" id="imageLi<%= image.id %>">
+            <div class="row" style="margin-bottom:-4px">
+                <span class="glyphicon glyphicon-ok-sign
+                glyphicon-image-status-ok pull-right"></span>
+            </div>
+            <div class="thumbnail" style="height:200px">
+                <img src="<%= imageUrlPrefix %><%= image.image_file %>"
+                     class="img-responsive" alt="Image"
+                     style="height:100%;width:100%">
+            </div>
+        </li>
+        <% }) %>
+    </ul>
+</div>
+
+<% if( images.length > 0 ){ %>
+<%- include pagination.ejs %>
+<% } %>
+
