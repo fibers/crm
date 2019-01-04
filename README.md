@@ -1,3 +1,3 @@
-# CRM based on Nodejs #
+# CRM #
 
-### This project is deprecated
+### This is a crm system based on Nodejs. It's deprecated !!!
